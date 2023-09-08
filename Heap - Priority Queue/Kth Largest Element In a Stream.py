@@ -24,16 +24,22 @@ kthLargest.add(4);   // return 8
 
 '''
 
+import heapq
+
 class KthLargest:
-    def __init__(self, k: int, nums: List[int]):
+    def __init__(self, k, nums):
         self.nums = nums
         self.k = k
+        # use heap cause it save time to add and delete number, second best option is binary search but it is O(n) insertion
         heapq.heapify(nums)
+        # Make sure heap of size K cause we only need the Kth element, no more
         while len(self.nums) > self.k:
             heapq.heappop(self.nums)
 
-    def add(self, val: int) -> int:
+    def add(self, val):
         heapq.heappush(self.nums, val)
+        # pop last element in heap (in array) to make sure heap of size K
         if len(self.nums) > self.k:
             heapq.heappop(self.nums)
+        # last element in heap size K is the Kth element itself
         return self.nums[0]
