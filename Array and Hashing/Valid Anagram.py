@@ -15,7 +15,6 @@ Output: false
 
 '''
 
-# Use a set/dict to count each different character in a word
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         if len(s) != len(t):
