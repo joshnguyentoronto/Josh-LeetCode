@@ -15,10 +15,10 @@ Input: nums = [-1,1,0,-3,3]
 Output: [0,0,9,0,0]
 '''
 
-# O(n) solution:
+
 '''
 Using prefix and postfix of the array
-            origin:  [  1,  2,  3, 4  ]
+            origin:  [  1,  2,  3,  4 ]
 
 prefix is multiply from a - z, keep the 1st element the same
             prefix:  [  1,  2,  6, 24 ]
@@ -40,11 +40,27 @@ time: O(2n) -> O(n)
 
 class Solution:
     def productExceptSelf(self, nums):
+        l = len(nums)
+        arr = [1] * l
+        for i in range(1,l):
+            arr[i] = arr[i-1] * nums[i-1]
+        post = 1
+        for i in range(l-1, 0, -1):
+            post *= nums[i]
+            arr[i-1] = arr[i-1] * post
+        return arr
 
 
-# O(1) solution challenge:
-'''
+
+# Shortcut version
 class Solution:
     def productExceptSelf(self, nums):
-
-'''
+        l = len(nums)
+        arr = [1] * l
+        pre = post = 1
+        for i in range(l):
+            arr[i] *= pre
+            pre *= nums[i]
+            arr[l-1-i] *= post
+            post *= nums[l-1-i]
+        return arr
