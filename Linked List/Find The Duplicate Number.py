@@ -33,3 +33,11 @@ Follow up:
 # Linear Time O(n) is a win, longer time is not good
 
 
+# Space O(n) cause I'm lazy
+class Solution:
+    def findDuplicate(self, nums):
+        copy = nums.copy()
+        copy.sort()
+        for i in range(1, len(copy)):
+            if copy[i] == copy[i-1]:
+                return copy[i]
